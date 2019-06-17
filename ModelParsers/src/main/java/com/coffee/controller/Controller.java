@@ -15,41 +15,30 @@ import com.coffee.modelParsers.varXmlToHLVLParser.VariamosXMLToHlvlParser;
 public class Controller {
 
 	@CrossOrigin
-	@RequestMapping(value = "/feature2Hlvl", method = RequestMethod.POST, produces = "text/plain")
+	@RequestMapping(value = "/coffeMP/feature2Hlvl", method = RequestMethod.POST, produces = "text/plain")
 	@ResponseBody
 	//FIXME corregir el parser de featureIDE
 	public String executeTest(@RequestBody JSONObject data) throws Exception {
-
-		System.out.println(data.get("data"));
 			FeatureIDEToHLVL fParser = new FeatureIDEToHLVL();
 		
 		return fParser.parse((String) data.get("data"));
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "/varXML2Hlvl", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/coffeMP/varXML2Hlvl", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String varXML2Hlvl(@RequestBody JSONObject data) throws Exception {
-
-		System.out.println(data.get("data"));
+		
 		VariamosXMLToHlvlParser vParser = new VariamosXMLToHlvlParser();
 	
 	return vParser.parse((String) data.get("data"));
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "/splot2Hlvl", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/coffeMP/splot2Hlvl", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String splot2Hlvl(@RequestBody String data) {
 
 		return "";
 	}
 }
-	
-//	@CrossOrigin
-//	@RequestMapping(value = "/parseHlvl", method = RequestMethod.POST, produces = "application/json")
-//	@ResponseBody
-//	public String parse(@RequestBody String data) {
-//
-//		return "";
-//	}
