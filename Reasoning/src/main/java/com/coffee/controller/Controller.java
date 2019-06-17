@@ -12,6 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
+	
+	@CrossOrigin
+	@RequestMapping(value = "/reasoning/test", method = RequestMethod.POST, produces = "text/plain")
+	@ResponseBody
+	public String test(@RequestBody JSONObject data) throws Exception {
+
+		return "Microservice working";
+	}
+	
 	@CrossOrigin
 	@RequestMapping(value = "/validModel", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

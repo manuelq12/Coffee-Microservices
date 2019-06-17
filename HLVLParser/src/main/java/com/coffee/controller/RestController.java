@@ -14,7 +14,6 @@ public class RestController {
 	@CrossOrigin
 	@RequestMapping(value = "/coffeHLVLP/hlvlParser", method = RequestMethod.POST, produces = "text/plain")
 	@ResponseBody
-	//TODO do: complete the method
 	public String hlvlParser(@RequestBody JSONObject data) throws Exception {
 		System.out.println(data);
 		return (String) data.get("data");
