@@ -1,9 +1,40 @@
-FROM openjdk
+FROM ubuntu
 MAINTAINER Joan David Colina <joancolina819@gmail.com>
-COPY target ./app
+
 WORKDIR /app
-RUN ls
-ENTRYPOINT ["java","-jar", "Reasoning-0.0.1-SNAPSHOT.jar"]
+ #Instalmos sudo
+RUN apt-get update && apt-get install -y sudo \
+
+#instalamos wget 
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+
+#Descargamos minizinc 2.2.3
+RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
+#Descromprimimos el archivo .tgz
+RUN tar xf MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
+
+#Descargamos Picat
+WORKDIR /app
+RUN wget http://picat-lang.org/download/picat26_linux64.tar.gz
+RUN tar xf picat26_linux64.tar.gz
+
+#Descargamos las librerias de picat
+WORKDIR /app
+WORKDIR MiniZincIDE-2.3.0-bundle-linux
+WORKDIR share
+WORKDIR minizinc
+RUN wget http://picat-lang.org/flatzinc/picat_globals.tar.gz -O picat_sat
+RUN tar xf picat_sat
+WORKDIR solvers
+
+
+
+
+
+
+
 
 
 
