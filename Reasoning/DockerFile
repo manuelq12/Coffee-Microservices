@@ -24,14 +24,12 @@ RUN  apt-get update \
 RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
 #Descromprimimos el archivo .tgz
 RUN tar xf MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
-WORKDIR /home
-WORKDIR /MiniZincIDE-2.3.0-bundle-linux
-WORKDIR /bin
-RUN echo $"export PATH=\$PATH:$(pwd)" >> ~/.bash_profile
-#RUN source ~/.bash_profile
-RUN minizinc --solvers
+WORKDIR /home/MiniZincIDE-2.3.0-bundle-linux/bin
+RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
+RUN sh ConfiguradorEntorno.sh
+RUN  minizinc --solvers
 #export PATH="$PATH:/home/MiniZincIDE-2.3.0-bundle-linux-x86_64/bin"\
-RUN  echo $PATH \
+RUN echo $PATH 
 #    minizinc --solvers
 
 #Descargamos Picat
@@ -40,19 +38,20 @@ RUN wget http://picat-lang.org/download/picat26_linux64.tar.gz
 RUN tar xf picat26_linux64.tar.gz
 
 #Descargamos las librerias de picat
-WORKDIR /home
-WORKDIR /MiniZincIDE-2.3.0-bundle-linux
-WORKDIR /share
-WORKDIR /minizinc
+WORKDIR /home/MiniZincIDE-2.3.0-bundle-linux/share/minizinc
 RUN wget http://picat-lang.org/flatzinc/picat_globals.tar.gz -O picat_sat
 RUN tar xf picat_sat
 
 #Descargando el .msc que necesita minizinc para funcionar
-WORKDIR /solvers
-RUN wget https://github.com/joancolina819/Coffee-Microservices/blob/master/Reasoning/archivos%20de%20solvers/picat_sat_cmd_line.msc
-
+WORKDIR /home/MiniZincIDE-2.3.0-bundle-linux/share/minizinc/solvers
+RUN wget https://raw.githubusercontent.com/joancolina819/Coffee-Microservices/master/Reasoning/archivos%20de%20solvers/msc/picat_sat_cmd_line.msc
+RUN ls
+#Descargando el .sh que necesita picat para funcionar
+WORKDIR /home/Picat
+RUN wget https://github.com/joancolina819/Coffee-Microservices/blob/master/Reasoning/archivos%20de%20solvers/sh%20files/picat.sh
+RUN ls
 #Clonamos el repositorio de JminiZinc
 WORKDIR /home
 RUN git clone https://github.com/siemens/JMiniZinc
 RUN ls 
-RUN minizinc --solvers
+RUN #!/bin/bash minizinc --solvers
