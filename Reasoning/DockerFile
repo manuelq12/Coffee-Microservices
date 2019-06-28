@@ -1,10 +1,20 @@
 FROM ubuntu
 MAINTAINER Joan David Colina <joancolina819@gmail.com>
 
-WORKDIR /app
- #Instalmos sudo
-RUN apt-get update && apt-get install -y sudo \
+WORKDIR /home
 
+#Instalmos sudo
+RUN apt-get update && apt-get install -y sudo
+#Instalamos git
+RUN yes | sudo apt-get install git
+#Instalamos maven
+RUN sudo apt update
+RUN yes | sudo apt install maven
+RUN mvn -version
+#Instalamos java
+RUN sudo apt update 
+RUN  yes | sudo apt install default-jdk
+RUN   java -version
 #instalamos wget 
 RUN  apt-get update \
   && apt-get install -y wget \
@@ -14,27 +24,35 @@ RUN  apt-get update \
 RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
 #Descromprimimos el archivo .tgz
 RUN tar xf MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
+WORKDIR /home
+WORKDIR /MiniZincIDE-2.3.0-bundle-linux
+WORKDIR /bin
+RUN echo $"export PATH=\$PATH:$(pwd)" >> ~/.bash_profile
+#RUN source ~/.bash_profile
+RUN minizinc --solvers
+#export PATH="$PATH:/home/MiniZincIDE-2.3.0-bundle-linux-x86_64/bin"\
+RUN  echo $PATH \
+#    minizinc --solvers
 
 #Descargamos Picat
-WORKDIR /app
+WORKDIR /home
 RUN wget http://picat-lang.org/download/picat26_linux64.tar.gz
 RUN tar xf picat26_linux64.tar.gz
 
 #Descargamos las librerias de picat
-WORKDIR /app
-WORKDIR MiniZincIDE-2.3.0-bundle-linux
-WORKDIR share
-WORKDIR minizinc
+WORKDIR /home
+WORKDIR /MiniZincIDE-2.3.0-bundle-linux
+WORKDIR /share
+WORKDIR /minizinc
 RUN wget http://picat-lang.org/flatzinc/picat_globals.tar.gz -O picat_sat
 RUN tar xf picat_sat
-WORKDIR solvers
 
+#Descargando el .msc que necesita minizinc para funcionar
+WORKDIR /solvers
+RUN wget https://github.com/joancolina819/Coffee-Microservices/blob/master/Reasoning/archivos%20de%20solvers/picat_sat_cmd_line.msc
 
-
-
-
-
-
-
-
-
+#Clonamos el repositorio de JminiZinc
+WORKDIR /home
+RUN git clone https://github.com/siemens/JMiniZinc
+RUN ls 
+RUN minizinc --solvers
