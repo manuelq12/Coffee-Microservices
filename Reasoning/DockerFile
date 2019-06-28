@@ -25,7 +25,8 @@ RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZin
 #Descromprimimos el archivo .tgz
 RUN tar xf MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
 WORKDIR /home/MiniZincIDE-2.3.0-bundle-linux/bin
-RUN wget https://github.com/MiniZinc/MiniZincIDE/releases/download/2.3.0/MiniZincIDE-2.3.0-bundle-linux-x86_64.tgz
+RUN wget https://raw.githubusercontent.com/joancolina819/Coffee-Microservices/master/Reasoning/archivos%20de%20solvers/scrips/ConfiguradorEntorno.sh
+Run cat ConfiguradorEntorno.sh
 RUN sh ConfiguradorEntorno.sh
 RUN  minizinc --solvers
 #export PATH="$PATH:/home/MiniZincIDE-2.3.0-bundle-linux-x86_64/bin"\

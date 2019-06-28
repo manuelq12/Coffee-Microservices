@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "export PATH=\$PATH:$(pwd)" >> ~/.bash_profile 
-source  ~/.bash_profile  
-minizinc --solvers
+echo source  ~/.bash_profile  
+echo minizinc --solvers
