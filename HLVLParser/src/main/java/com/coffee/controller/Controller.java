@@ -29,10 +29,12 @@ public class Controller {
 	@RequestMapping(value = "/coffeeHLVLP/hlvlParser", method = RequestMethod.POST, produces = "text/plain")
 	@ResponseBody
 	public String hlvlParser(@RequestBody JSONObject data) throws Exception {
+		System.out.println("YA llego la peticion");
 		String content = (String) data.get("data");
 		File file = fileCreator.createFile(content);
 		executor.initialize(DIR);
 		parseHLVL();
+		System.out.println("El resultado es:"+fileCreator.fileReader());
 		return fileCreator.fileReader();
 	}
 

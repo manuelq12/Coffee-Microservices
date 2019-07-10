@@ -2,6 +2,7 @@ package com.coffee.controller;
 
 import javax.json.JsonObject;
 
+
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,22 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.coffee.com.coffee.reasoning.Reasoning;
 
 @RestController
 public class Controller {
 
-	
-	@CrossOrigin
-	@RequestMapping(value = "/reasoning/test", method = RequestMethod.POST, produces = "text/plain")
-	@ResponseBody
-	public String test(@RequestBody JSONObject data) throws Exception {
-
-		
-		System.out.println(data.get("data + AQUIIIIIIIIIIII"));
-		return "Microservice working";
-	}
-	
 	@CrossOrigin
 	@RequestMapping(value = "/reasoning/validModel", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -38,7 +29,7 @@ public class Controller {
 	@CrossOrigin
 	@RequestMapping(value = "/reasoning/oneConfiguration", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String oneConfiguration(@RequestBody JSONObject model, @RequestBody JSONObject configuration) throws Exception {
+	public String oneConfiguration(@RequestBody JSONObject model) throws Exception {
 		//TODO:fix me
 		String frontEndData="{\r\n" + 
 				" \"solverSelected\" : \"\",\r\n" + 
@@ -49,10 +40,12 @@ public class Controller {
 				"	\"mstprim\":false\r\n" + 
 				"	}\r\n" + 
 				"}";
-//		System.out.println("Model: " + model.get("data"));
-//		System.out.println("Configuration: " + configuration.get("data"));
+		String data= (String)model.get("data");
+		String mnz= data.split("separadorcoffee")[0];
+		String modelData= data.split("separadorcoffee")[1];
 		Reasoning reasoning = new Reasoning();
-		JsonObject solution = reasoning.coffeeCompile((String) model.get("data"), frontEndData,(String) configuration.get("data"), 1);
+		JsonObject solution = reasoning.coffeeCompile(mnz, frontEndData,modelData, 1);
+		System.out.println("SOLUCION:"+solution.toString());
 		return solution.toString();
 	}
 	
@@ -69,8 +62,7 @@ public class Controller {
 				"	\"mstprim\":false\r\n" + 
 				"	}\r\n" + 
 				"}";
-//		System.out.println("Number of configurations: " + n);
-//		System.out.println("Configuration: " + configuration.get("data"));
+
 		Reasoning reasoning = new Reasoning();
 		JsonObject solution = reasoning.coffeeCompile((String) model.get("data"), frontEndData,(String) configuration.get("data"), n);
 		return solution.toString();
