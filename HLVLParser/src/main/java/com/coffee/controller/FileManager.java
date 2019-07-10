@@ -29,10 +29,10 @@ public class FileManager {
 	}
 
 	public String fileReader() throws IOException {
-		byte[] encoded = Files.readAllBytes(Paths.get(RestController.DIR + "\\src-gen\\CommonTest_generated.mzn"));
+		byte[] encoded = Files.readAllBytes(Paths.get(Controller.DIR + "\\src-gen\\CommonTest_generated.mzn"));
 		String mzn = new String(encoded, "UTF-8");
 
-		encoded = Files.readAllBytes(Paths.get(RestController.DIR + "\\src-gen\\CommonTest_generated.mzn"));
+		encoded = Files.readAllBytes(Paths.get(Controller.DIR + "\\src-gen\\CommonTest_generated_Operations.json"));
 		String json = new String(encoded, "UTF-8");
 
 		return mzn + "separadorcoffee" + json;

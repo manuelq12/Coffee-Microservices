@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @org.springframework.web.bind.annotation.RestController
-public class RestController {
+public class Controller {
 
 	public final static String DIR = System.getProperty("user.dir");
 	private final static String HLVL_DIR = "\\hlvl\\";
@@ -33,7 +33,6 @@ public class RestController {
 		File file = fileCreator.createFile(content);
 		executor.initialize(DIR);
 		parseHLVL();
-		
 		return fileCreator.fileReader();
 	}
 

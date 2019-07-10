@@ -21,6 +21,8 @@ public class Controller {
 	@ResponseBody
 	public String test(@RequestBody JSONObject data) throws Exception {
 
+		
+		System.out.println(data.get("data + AQUIIIIIIIIIIII"));
 		return "Microservice working";
 	}
 	
