@@ -41,4 +41,11 @@ public class Controller {
 
 		return "";
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/coffeMP/modelConfigurations", method = RequestMethod.POST)
+	@ResponseBody
+	public void getModelConfigurations(@RequestBody JSONObject data) {
+		System.out.println(data.get("data"));
+	}
 }
