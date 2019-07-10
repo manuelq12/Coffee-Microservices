@@ -17,10 +17,9 @@ public class Controller {
 	@CrossOrigin
 	@RequestMapping(value = "/coffeMP/feature2Hlvl", method = RequestMethod.POST, produces = "text/plain")
 	@ResponseBody
-	//FIXME corregir el parser de featureIDE
 	public String executeTest(@RequestBody JSONObject data) throws Exception {
 			FeatureIDEToHLVL fParser = new FeatureIDEToHLVL();
-		
+		System.out.println(data);
 		return fParser.parse((String) data.get("data"));
 	}
 
@@ -28,7 +27,7 @@ public class Controller {
 	@RequestMapping(value = "/coffeMP/varXML2Hlvl", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String varXML2Hlvl(@RequestBody JSONObject data) throws Exception {
-		
+		System.out.println(data);
 		VariamosXMLToHlvlParser vParser = new VariamosXMLToHlvlParser();
 	
 	return vParser.parse((String) data.get("data"));
