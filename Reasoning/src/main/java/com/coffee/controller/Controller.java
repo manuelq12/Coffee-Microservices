@@ -43,9 +43,11 @@ public class Controller {
 		String data= (String)model.get("data");
 		String mnz= data.split("separadorcoffee")[0];
 		String modelData= data.split("separadorcoffee")[1];
+		
+		System.out.println(mnz + " " + modelData);
 		Reasoning reasoning = new Reasoning();
 		JsonObject solution = reasoning.coffeeCompile(mnz, frontEndData,modelData, 1);
-		System.out.println("SOLUCION:"+solution.toString());
+//		System.out.println("SOLUCION:"+solution.toString());
 		return solution.toString();
 	}
 	
