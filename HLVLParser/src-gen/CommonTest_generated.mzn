@@ -17,7 +17,7 @@ var bool : TRESGConector ;
 var bool : HardWare ;
 var bool : EjemploFeatureIDE ;
 % Variables and constraints from the variability relations definition
-constraint EjemploFeatureIDE = true ;
+constraint EjemploFeatureIDE == true ;
 constraint EjemploFeatureIDE <-> HardWare ;
 constraint TRESGConector -> HardWare ;
 constraint HardWare <-> ScreenResolution ;

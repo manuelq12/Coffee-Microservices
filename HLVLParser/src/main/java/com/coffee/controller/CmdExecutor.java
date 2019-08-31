@@ -73,8 +73,6 @@ public class CmdExecutor {
 		debugLog += "*** Command Input ***\n" + inputStr;
 		debugLog += "*** Command Error Output ***\n" + errStr;
 
-		System.out.println("exitCode=" + exitCode);
-		System.out.println("p.isAlive()=" + process.isAlive());
 		// assert exitCode == 0;
 		return exitCode;
 	}

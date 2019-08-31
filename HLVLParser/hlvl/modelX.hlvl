@@ -1,31 +1,25 @@
-model  commonTest_generated
+model  Auto_generated
 elements: 
-	boolean Testris
-	boolean TRESDCarRace
-	boolean Chess
-	boolean Games
-	boolean Task
-	boolean VideoCall
-	boolean GPS
-	boolean RAM
-	boolean GPU
-	boolean CPU
-	boolean Processors
-	boolean ScreenResolution
-	boolean TRESGConector
-	boolean HardWare
-	boolean EjemploFeatureIDE
+	boolean Sala_de_juegos
+	boolean Banera
+	boolean Cuarto_secundario
+	boolean ducha
+	boolean Lava_Platos
+	boolean Garaje
+	boolean Orno
+	boolean Casa
+	boolean Bano
+	boolean Cocina
+	boolean Cuarto_Principal
+	boolean Biblioteca
 relations:
-	r0: common(EjemploFeatureIDE)
-	r1:decomposition(EjemploFeatureIDE,[HardWare],[1,1])
-	r2:decomposition(HardWare,[TRESGConector],[0,1])
-	r3:decomposition(HardWare,[ScreenResolution],[1,1])
-	r4:decomposition(HardWare,[Processors],[1,1])
-	r5:decomposition(Processors,[CPU],[0,1])
-	r6:decomposition(Processors,[GPU],[0,1])
-	r7:decomposition(HardWare,[RAM],[1,1])
-	r8:decomposition(HardWare,[GPS],[0,1])
-	r9:decomposition(EjemploFeatureIDE,[VideoCall],[0,1])
-	r10:decomposition(EjemploFeatureIDE,[Task],[0,1])
-	r11:group(Games,[Chess, TRESDCarRace, Testris],[1,*])
-	r12:decomposition(EjemploFeatureIDE,[Games],[0,1])
+	r0: common(Casa)
+	r1:group(Casa,[Cocina, Bano, Cuarto_Principal, Cuarto_secundario],[1,*])
+	r2:group(Casa,[Biblioteca, Sala_de_juegos],[1,*])
+	r3:group(Bano,[Banera, ducha],[1,*])
+	r4:decomposition(Lava_Platos,[Cocina],[1,1])
+	r5:decomposition(Cocina,[Orno],[0,1])
+	r6: implies(Cuarto_Principal,Bano)
+	r7:decomposition(Bano,[Cuarto_secundario],[0,1])
+	r8:decomposition(Casa,[Garaje],[0,1])
+	r9: mutex(Biblioteca, Sala_de_juegos)

@@ -2,7 +2,6 @@ package com.coffee.controller;
 
 import javax.json.JsonObject;
 
-
 import org.json.simple.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,57 +16,38 @@ import com.coffee.com.coffee.reasoning.Reasoning;
 @RestController
 public class Controller {
 
+	public final static String FRONTEND_DATA = "{\r\n" + " \"solverSelected\" : \"\",\r\n" + "\"configuration\" : \r\n"
+			+ "{\r\n" + "}\r\n" + "}";
+
 	@CrossOrigin
 	@RequestMapping(value = "/reasoning/validModel", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public boolean validModel(@RequestBody JSONObject data) throws Exception {
-		boolean isValid = true; 
-		System.out.println(data.get("data"));
+		boolean isValid = true;
 		return isValid;
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/reasoning/oneConfiguration", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public String oneConfiguration(@RequestBody JSONObject model) throws Exception {
-		//TODO:fix me
-		String frontEndData="{\r\n" + 
-				" \"solverSelected\" : \"\",\r\n" + 
-				" \"problemType\":\"BOOL\",\r\n" + 
-				"\"configuration\" : \r\n" + 
-				"	{\r\n" + 
-				"	\"DFS\":true,\r\n" + 
-				"	\"mstprim\":false\r\n" + 
-				"	}\r\n" + 
-				"}";
-		String data= (String)model.get("data");
-		String mnz= data.split("separadorcoffee")[0];
-		String modelData= data.split("separadorcoffee")[1];
-		
-		System.out.println(mnz + " " + modelData);
+		String data = (String) model.get("data");
+		String mnz = data.split("separadorcoffee")[0];
+		String modelData = data.split("separadorcoffee")[1];
 		Reasoning reasoning = new Reasoning();
-		JsonObject solution = reasoning.coffeeCompile(mnz, frontEndData,modelData, 1);
-//		System.out.println("SOLUCION:"+solution.toString());
-		return solution.toString();
+		JsonObject solution = reasoning.coffeeCompile(mnz, FRONTEND_DATA, modelData, 1);
+		return solution.get("solutions") + "";
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/reasoning/nConfigurations", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public String nConfigurations(@RequestBody int n, @RequestBody JSONObject configuration, @RequestBody JSONObject model) throws Exception {
-		String frontEndData="{\r\n" + 
-				" \"solverSelected\" : \"\",\r\n" + 
-				" \"problemType\":\"BOOL\",\r\n" + 
-				"\"configuration\" : \r\n" + 
-				"	{\r\n" + 
-				"	\"DFS\":true,\r\n" + 
-				"	\"mstprim\":false\r\n" + 
-				"	}\r\n" + 
-				"}";
-
+	public String nConfigurations(@RequestBody int n, @RequestBody JSONObject configuration,
+			@RequestBody JSONObject model) throws Exception {
 		Reasoning reasoning = new Reasoning();
-		JsonObject solution = reasoning.coffeeCompile((String) model.get("data"), frontEndData,(String) configuration.get("data"), n);
+		JsonObject solution = reasoning.coffeeCompile((String) model.get("data"), "",
+				(String) configuration.get("data"), n);
 		return solution.toString();
 	}
-	
+
 }

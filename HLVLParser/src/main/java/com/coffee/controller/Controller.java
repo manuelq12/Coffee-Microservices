@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Controller {
 
 	public final static String DIR = System.getProperty("user.dir");
-	private final static String HLVL_DIR = "\\hlvl\\";
+	private final static String HLVL_DIR = "/hlvl/";
 
 	@Autowired
 	FileManager fileCreator;
@@ -30,20 +30,20 @@ public class Controller {
 	@ResponseBody
 	public String hlvlParser(@RequestBody JSONObject data) throws Exception {
 		String content = (String) data.get("data");
+		fileCreator.getName(content);
 		File file = fileCreator.createFile(content);
 		executor.initialize(DIR);
 		parseHLVL();
-		System.out.println("El resultado es:"+fileCreator.fileReader());
 		return fileCreator.fileReader();
 	}
 
 	private void parseHLVL() throws InterruptedException, IOException {
 		List<String> params = new ArrayList<String>();
-		String command = "java -jar " + "\""+DIR + "\\dependencies\\HLVLParserV1.2.jar"+"\" "+  "\"" +DIR+ HLVL_DIR + FileManager.DEFAULT_NAME
-				+ ".hlvl"+"\"";
+		String command = "java -jar "+ "\"" + DIR + "/dependencies/HLVLParserV1.4.jar"+ "\" " + "\"" +DIR+ HLVL_DIR + FileManager.DEFAULT_NAME+ ".hlvl"+ "\"";
 		params.add(command);
 		executor.setCommandInConsole(params);
 		executor.runCmd();
-	}
 	
+	}
+
 }
