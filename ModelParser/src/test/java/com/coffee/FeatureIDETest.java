@@ -71,8 +71,7 @@ public class FeatureIDETest {
 				"	r11:group(Games,[Chess, TRESDCarRace, Testris],[1,*])\n" + 
 				"	r12:decomposition(EjemploFeatureIDE,[Games],[0,1])\n" + 
 				"";
-//		System.out.println("RESPONDE STATUS"+response.getStatus());
-//		System.out.println("AQUI:" + response.getContentAsString());
+
 		assertEquals(hlvlResponse, response.getContentAsString());
 	}
 }

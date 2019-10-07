@@ -1,6 +1,5 @@
 package com.coffee.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.coffee.generator.HLVLParser;
 
 @org.springframework.web.bind.annotation.RestController
 public class Controller {
@@ -30,8 +31,16 @@ public class Controller {
 	@ResponseBody
 	public String hlvlParser(@RequestBody JSONObject data) throws Exception {
 		String content = (String) data.get("data");
+		return HLVLParser.runGenerator(content);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/coffeeHLVLP/hlvlParserFile", method = RequestMethod.POST, produces = "text/plain")
+	@ResponseBody
+	public String hlvlParserFile(@RequestBody JSONObject data) throws Exception {
+		String content = (String) data.get("data");
 		fileCreator.getName(content);
-		File file = fileCreator.createFile(content);
+		fileCreator.createFile(content);
 		executor.initialize(DIR);
 		parseHLVL();
 		return fileCreator.fileReader();
