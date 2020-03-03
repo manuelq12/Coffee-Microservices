@@ -20,9 +20,9 @@ RUN  apt-get update \
   && apt-get install -y wget \
   && rm -rf /var/lib/apt/lists/*
 #Clonamos el repositorio
-RUN git clone https://github.com/joancolina819/Coffee-Microservices
+RUN git clone https://github.com/manuelq12/Coffee-Microservices
 WORKDIR /home/Coffee-Microservices/ModelParsers
+EXPOSE 8082
 ENTRYPOINT ["java","-jar", "ParserCoffeServer-0.0.1-SNAPSHOT.jar"]
 
-EXPOSE 8082 
 

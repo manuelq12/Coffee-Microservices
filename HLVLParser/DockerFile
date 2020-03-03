@@ -24,10 +24,9 @@ WORKDIR /home
 RUN git clone https://github.com/manuelq12/Coffee-Microservices
 WORKDIR /home/Coffee-Microservices/HLVLParser
 #RUN ls
+EXPOSE 8888
 #RUN java -jar /home/Coffee-Microservices/HLVLParser/dependencies/HLVLParserV1.2.jar /home/Coffee-Microservices/HLVLParser/hlvl/modelX.hlvl
 ENTRYPOINT ["java","-jar", "HLVLParser-0.0.1-SNAPSHOT.jar"]
-
-EXPOSE 8888
 
 
 
